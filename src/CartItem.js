@@ -10,7 +10,7 @@ const CartItem  = (props) => {
     return (
       <div className="cart-item">
         <div className="left-block">
-          <img src="https://img.tatacliq.com/images/i7/437Wx649H/MP000000010632207_437Wx649H_202109171909501.jpeg" style={styles.image} alt="product" />
+          <img style={styles.image} alt="product" src={product.img}/>
         </div>
         <div className="right-block">
           <div style={{ fontSize: 25 }}>{title}</div>
@@ -45,8 +45,8 @@ const CartItem  = (props) => {
 
 const styles = {
   image: {
-    height: 110,
-    width: 110,
+    height: 145,
+    width: 140,
     borderRadius: 4,
     background: "#ccc",
   },
