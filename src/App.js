@@ -39,6 +39,9 @@ class App extends React.Component {
 
     this.db
     .collection('products')
+    // .where('price','==', 199)
+    // .where('title','==','Mug')
+    .orderBy('price','asc')
     .onSnapshot((snapshot) => {
       console.log(snapshot);
 
@@ -107,7 +110,7 @@ class App extends React.Component {
      })
   }
   handleDeleteProduct = (id) => {
-    const { products } = this.state;
+    // const { products } = this.state;
     // const items = products.filter((item) => item.id !== id); //[{}] return an array of items not equal to passesd id
     // this.setState({
     //   products: items
@@ -153,9 +156,9 @@ class App extends React.Component {
       .collection('products')
       .add({
          img: '',
-         price: 999,
-         qty: 3,
-         title: 'Washing Machine'
+         price: 199,
+         qty: 1,
+         title: 'Mug'
       })
       .then((docRef) => {
           console.log("product added ", docRef);
@@ -172,6 +175,7 @@ class App extends React.Component {
         <Navbar
           count={this.getCartCount()} 
         />
+        {/* Button to add product */}
         {/* <button onClick={this.addProduct} style={{ padding: 20, fontSize: 20}}>Add a product</button> */}
         <Cart
           products = {products}
