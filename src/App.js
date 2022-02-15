@@ -65,10 +65,22 @@ class App extends React.Component {
       const { products } = this.state;
       const index = products.indexOf(product);
 
-      products[index].qty += 1;
-      this.setState({
-        products
-      })
+      // products[index].qty += 1;
+      // this.setState({
+      //   products
+      // })
+
+      const docRef = this.db.collection('products').doc(products[index].id);
+      docRef
+       .update({
+         qty: products[index].qty + 1
+       })
+       .then(() => {
+         console.log('Document Updated Successfully');
+       })
+       .catch((error) => {
+         console.log('Error: ', error);
+       })
   }
   handleDecreaseQuantity = (product) => {
     const { products } = this.state;
@@ -138,7 +150,7 @@ class App extends React.Component {
         <Navbar
           count={this.getCartCount()} 
         />
-        <button onClick={this.addProduct} style={{ padding: 20, fontSize: 20}}>Add a product</button>
+        {/* <button onClick={this.addProduct} style={{ padding: 20, fontSize: 20}}>Add a product</button> */}
         <Cart
           products = {products}
           onIncreaseQuantity={this.handleIncreaseQuantity}
@@ -147,7 +159,7 @@ class App extends React.Component {
         />
         {loading && <h1>Loading Products ....</h1>}
         <div style = { { fontSize: 20,padding: 10}}>TOTAL: {this.getCartTotal()}</div>
-      </div>
+      </div> 
 
     );
   }
