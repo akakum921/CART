@@ -11,15 +11,37 @@ class App extends React.Component {
         products: [],
         loading: true
     };
+    this.db = firebase.firestore();
     // this.increaseQuantity = this.increaseQuantity.bind(this);
   }
   componentDidMount () {
-    firebase
-    .firestore()
+    // firebase
+    // .firestore()
+    // .collection('products')
+    // .get()
+    // .then((snapshot) => {
+    //   console.log(snapshot);
+    //   snapshot.docs.map((doc) => {
+    //     console.log(doc.data());
+    //     return '';
+    //   });
+
+    //   const products = snapshot.docs.map((doc) => {
+    //     const data = doc.data();
+    //     data['id'] = doc.id;
+    //     return data;
+    //   })
+    //   this.setState({
+    //     products: products,
+    //     loading: false
+    //   })
+    // })
+
+    this.db
     .collection('products')
-    .get()
-    .then((snapshot) => {
+    .onSnapshot((snapshot) => {
       console.log(snapshot);
+
       snapshot.docs.map((doc) => {
         console.log(doc.data());
         return '';
@@ -36,6 +58,7 @@ class App extends React.Component {
       })
     })
   }
+  
 
   handleIncreaseQuantity = (product) => {
       // console.log('Hey',product);
@@ -91,6 +114,23 @@ class App extends React.Component {
     
     return cartTotal;
   }
+  addProduct = () => {
+    this.db
+      .collection('products')
+      .add({
+         img: '',
+         price: 999,
+         qty: 3,
+         title: 'Washing Machine'
+      })
+      .then((docRef) => {
+          console.log("product added ", docRef);
+      })
+      .catch((error) =>{
+        console.log('Error: ', error);
+      })
+  }
+
   render () {
     const { products, loading } = this.state;
     return (
@@ -98,6 +138,7 @@ class App extends React.Component {
         <Navbar
           count={this.getCartCount()} 
         />
+        <button onClick={this.addProduct} style={{ padding: 20, fontSize: 20}}>Add a product</button>
         <Cart
           products = {products}
           onIncreaseQuantity={this.handleIncreaseQuantity}
