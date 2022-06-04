@@ -1,6 +1,13 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br/>
+Created a simple cart web app using react with cloud store firebase
+
+# Screenshots
+![1](https://user-images.githubusercontent.com/66863702/172021866-bb743eac-b00a-471c-894e-c04a987ffca9.jpg)
+![2](https://user-images.githubusercontent.com/66863702/172021869-c21e5103-a83c-472f-a12f-233578d03850.jpg)
+
 
 ## Available Scripts
 
